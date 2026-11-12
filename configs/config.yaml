@@ -1,0 +1,117 @@
+# =============================================================================
+# IRIS MLOPS PROJECT - MAIN CONFIGURATION
+# =============================================================================
+
+project:
+  name: "iris_mlops_project"
+  version: "1.0.0"
+  description: "Complete MLOps pipeline for Iris classification"
+
+# -----------------------------------------------------------------------------
+# DATA CONFIGURATION
+# -----------------------------------------------------------------------------
+data:
+  raw_path: "data/raw/iris.csv"
+  processed_path: "data/processed"
+  features_path: "data/features"
+  test_size: 0.2
+  validation_size: 0.1
+  random_state: 42
+  target_column: "species"
+
+# -----------------------------------------------------------------------------
+# FEATURE ENGINEERING CONFIGURATION
+# -----------------------------------------------------------------------------
+features:
+  scaling_method: "standard"  # Options: standard, minmax, robust
+  create_polynomial: true
+  polynomial_degree: 2
+  create_interactions: true
+  feature_selection: true
+  n_features_to_select: 10
+
+# -----------------------------------------------------------------------------
+# MODEL CONFIGURATION
+# -----------------------------------------------------------------------------
+model:
+  type: "random_forest"  # Options: random_forest, logistic_regression, svm, gradient_boosting
+
+  # Random Forest Parameters
+  random_forest:
+    n_estimators: 100
+    max_depth: 10
+    min_samples_split: 2
+    min_samples_leaf: 1
+    random_state: 42
+    n_jobs: -1
+
+  # Logistic Regression Parameters
+  logistic_regression:
+    C: 1.0
+    max_iter: 1000
+    solver: "lbfgs"
+    random_state: 42
+
+  # SVM Parameters
+  svm:
+    C: 1.0
+    kernel: "rbf"
+    gamma: "scale"
+    random_state: 42
+
+  # Gradient Boosting Parameters
+  gradient_boosting:
+    n_estimators: 100
+    learning_rate: 0.1
+    max_depth: 5
+    random_state: 42
+
+# -----------------------------------------------------------------------------
+# TRAINING CONFIGURATION
+# -----------------------------------------------------------------------------
+training:
+  cross_validation: true
+  cv_folds: 5
+  early_stopping: false
+  hyperparameter_tuning: false
+  tuning_method: "grid_search"  # Options: grid_search, random_search
+
+# -----------------------------------------------------------------------------
+# EVALUATION CONFIGURATION
+# -----------------------------------------------------------------------------
+evaluation:
+  metrics:
+    - accuracy
+    - precision
+    - recall
+    - f1_score
+    - confusion_matrix
+    - classification_report
+  save_plots: true
+  plots_path: "experiments/plots"
+
+# -----------------------------------------------------------------------------
+# EXPERIMENT TRACKING
+# -----------------------------------------------------------------------------
+experiment:
+  tracking_uri: "sqlite:///experiments/mlflow.db"
+  experiment_name: "iris_classification"
+  log_models: true
+  log_artifacts: true
+
+# -----------------------------------------------------------------------------
+# MODEL REGISTRY
+# -----------------------------------------------------------------------------
+registry:
+  path: "models/registry"
+  promotion_threshold:
+    accuracy: 0.90
+    f1_score: 0.88
+
+# -----------------------------------------------------------------------------
+# LOGGING CONFIGURATION
+# -----------------------------------------------------------------------------
+logging:
+  level: "INFO"
+  log_file: "logs/pipeline.log"
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {module}:{function}:{line} - {message}"

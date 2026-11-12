@@ -1,0 +1,45 @@
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# pytest cache
+.pytest_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Model files (uncomment if you don't want to track large model files)
+# models/*.pkl
+# models/*.joblib
+
+# Experiments tracking (MLflow, etc.)
+mlruns/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env

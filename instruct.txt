@@ -1,0 +1,5 @@
+1. create .github/workflows directory 
+2. now paste ci.yml and cd.yml
+3. Create file name as Docker and paste the information from Docker.txt in the project directory 
+4. create .gitignore & .dockerignore files..
+5. finally create docker-compose.yml in the project directory..
